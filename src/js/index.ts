@@ -6,6 +6,9 @@ import { init, StorageAdapterLS } from "@opendash/core";
 import { registerIconPack } from "@opendash/icons";
 import { ParsePlugin } from "@opendash/plugin-parse";
 
+import { ExamplePage } from "./pages/example/ExamplePage";
+import { ExamplePageState } from "./pages/example/ExamplePageState";
+
 init("opendash", async (factory) => {
   // Icons
   // @ts-ignore
@@ -48,6 +51,40 @@ init("opendash", async (factory) => {
       authLdapActive: false,
     })
   );
+
+  // Routes
+  factory.registerStatefullRoute({
+    path: "/example",
+    state: ExamplePageState,
+    componentSync: ExamplePage,
+  });
+
+  // Navigation
+  factory.registerStaticNavigationItem({
+    id: "example/frontpage",
+    group: "example",
+    place: "frontpage",
+    order: 1,
+    label: "app:example.title",
+    icon: "fa:smile",
+    color: "#782235",
+    link: "/example",
+    routeCondition: "**",
+    activeCondition: "/",
+  });
+
+  factory.registerStaticNavigationItem({
+    id: "example/frontpage2",
+    group: "example",
+    place: "frontpage",
+    order: 2,
+    label: "app:example.title",
+    icon: "fa:smile",
+    color: "#782235",
+    link: "/example",
+    routeCondition: "**",
+    activeCondition: "/",
+  });
 }).then((app) => {
   console.log("init open.DASH");
 });
