@@ -1,5 +1,6 @@
 {
   "example": {
-    "title": "Beispiel Seite"
+    "title": "Beispiel Seite",
+    "content": "Produkte aus dem Beispiel Request: {{count}}"
   }
 }
