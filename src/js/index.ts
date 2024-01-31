@@ -15,6 +15,9 @@ init("opendash", async (factory) => {
   factory.registerLanguage("en", "English");
   factory.registerLanguage("de", "Deutsch", "en", true);
 
+  // Logo
+  factory.ui.setLogoImage("/logo.svg");
+
   // Ant Design Translations
   factory.registerAntDesignTranslation(
     "en",
