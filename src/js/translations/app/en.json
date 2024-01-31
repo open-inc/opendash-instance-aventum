@@ -1,6 +1,5 @@
 {
   "example": {
-    "title": "Example Page",
-    "content": "Products from the example request: {{count}}"
+    "title": "Example Page"
   }
 }
