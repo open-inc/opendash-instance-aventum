@@ -6,6 +6,8 @@ import { init, StorageAdapterLS } from "@opendash/core";
 import { registerIconPack } from "@opendash/icons";
 import { ParsePlugin } from "@opendash/plugin-parse";
 
+import { Layout } from "./components/Layout";
+
 import { ExamplePage } from "./pages/example/ExamplePage";
 import { ExamplePageState } from "./pages/example/ExamplePageState";
 
@@ -55,6 +57,7 @@ init("opendash", async (factory) => {
   // Routes
   factory.registerStatefullRoute({
     path: "/example",
+    layout: Layout as React.ComponentType<React.PropsWithChildren>,
     state: ExamplePageState,
     componentSync: ExamplePage,
   });
