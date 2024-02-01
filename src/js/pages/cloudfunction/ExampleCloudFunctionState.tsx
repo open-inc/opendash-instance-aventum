@@ -1,5 +1,6 @@
 import { RouteContext } from "@opendash/router";
 import { makeAutoObservable } from "mobx";
+import Parse from "Parse";
 
 interface Product {
   id: string;
@@ -7,7 +8,7 @@ interface Product {
   self_link: string;
 }
 
-export class ExamplePageState {
+export class ExampleCloudFunctionState {
   ctx: RouteContext;
 
   products: Product[] = [];
@@ -15,7 +16,7 @@ export class ExamplePageState {
   constructor(ctx: RouteContext) {
     this.ctx = ctx;
 
-    ctx.setTitle("app:example.title");
+    ctx.setTitle("app:cloudfunction.title");
     ctx.setDescription(undefined);
 
     makeAutoObservable(this);
@@ -24,9 +25,9 @@ export class ExamplePageState {
   }
 
   async init() {
-    const response = await fetch("https://api.predic8.de/shop/v2/products");
-    const data = await response.json();
-    this.setProducts(data.products);
+    const response = await Parse.Cloud.run("democloudfunction");
+
+    this.setProducts(response);
   }
 
   setProducts(products: Product[]) {

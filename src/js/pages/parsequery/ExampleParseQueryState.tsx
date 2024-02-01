@@ -1,13 +1,16 @@
 import { RouteContext } from "@opendash/router";
 import { makeAutoObservable } from "mobx";
+import Parse from "Parse";
 
 interface Product {
-  id: string;
+  objectId: string;
+  createdAt: Date;
+  updatedAt: Date;
   name: string;
   self_link: string;
 }
 
-export class ExamplePageState {
+export class ExampleParseQueryState {
   ctx: RouteContext;
 
   products: Product[] = [];
@@ -15,7 +18,7 @@ export class ExamplePageState {
   constructor(ctx: RouteContext) {
     this.ctx = ctx;
 
-    ctx.setTitle("app:example.title");
+    ctx.setTitle("app:parsequery.title");
     ctx.setDescription(undefined);
 
     makeAutoObservable(this);
@@ -24,9 +27,11 @@ export class ExamplePageState {
   }
 
   async init() {
-    const response = await fetch("https://api.predic8.de/shop/v2/products");
-    const data = await response.json();
-    this.setProducts(data.products);
+    const products = Parse.Object.extend("products");
+    const response = new Parse.Query(products);
+    const results = await response.find();
+
+    this.setProducts(results as Product[]);
   }
 
   setProducts(products: Product[]) {

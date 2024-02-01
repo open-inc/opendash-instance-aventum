@@ -1,5 +1,12 @@
 {
   "example": {
-    "title": "Example Page"
+    "title": "Example Page",
+    "content": "Products from the example request: {{count}}"
+  },
+  "cloudfunction": {
+    "title": "Cloud Function Example"
+  },
+  "parsequery": {
+    "title": "Parse Query Example"
   }
 }
